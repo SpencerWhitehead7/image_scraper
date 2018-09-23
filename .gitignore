@@ -1,2 +1,2 @@
-#Ignore all npm modules
-node_modules/*
+#Ignore all downloaded pictures
+downloaded_pictures/*
