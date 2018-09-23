@@ -1,0 +1,16 @@
+{
+  "name": "instagram_scraper",
+  "version": "1.0.0",
+  "description": "Scraper for downloading instagram photos in batches",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scraper",
+    "instagram"
+  ],
+  "author": "spencer",
+  "license": "Unlicense",
+  "dependencies": {}
+}
