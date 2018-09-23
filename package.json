@@ -12,5 +12,7 @@
   ],
   "author": "spencer",
   "license": "Unlicense",
-  "dependencies": {}
+  "dependencies": {
+    "request-promise-native": "^1.0.5"
+  }
 }
