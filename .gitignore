@@ -1,4 +1,7 @@
 node_modules
 
+# secrets
+.env
+
 #Ignore all downloaded pictures
 downloaded_pictures/*
