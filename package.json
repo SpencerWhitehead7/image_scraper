@@ -1,0 +1,17 @@
+{
+  "name": "image-scraper",
+  "version": "1.0.0",
+  "description": "Sets of headless browser scraping scripts",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpencerWhitehead7/image-scraper.git"
+  },
+  "author": "spencer",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/SpencerWhitehead7/image-scraper/issues"
+  },
+  "homepage": "https://github.com/SpencerWhitehead7/image-scraper#readme"
+}
