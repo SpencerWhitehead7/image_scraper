@@ -1,2 +1,4 @@
+node_modules
+
 #Ignore all downloaded pictures
 downloaded_pictures/*

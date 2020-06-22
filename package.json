@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/SpencerWhitehead7/image-scraper/issues"
   },
-  "homepage": "https://github.com/SpencerWhitehead7/image-scraper#readme"
+  "homepage": "https://github.com/SpencerWhitehead7/image-scraper#readme",
+  "dependencies": {
+    "puppeteer": "^4.0.0"
+  }
 }
