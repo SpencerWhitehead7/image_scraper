@@ -3,5 +3,6 @@ node_modules
 # secrets
 .env
 
-#Ignore all downloaded pictures
+# Ignore scraped posts
 downloaded_pictures/*
+postTexts.txt
