@@ -10,6 +10,7 @@ const download = require('download');
   try {
     const { fbUsername, fbPassword } = process.env
     const accountNameToScrape = process.argv[2]
+    const picturesToSave = process.argv[3]
 
     browser = await puppeteer.launch({
       // headless: false,
@@ -63,12 +64,16 @@ const download = require('download');
         urlsToCheck.push(page.url())
       }
 
-      const newImageSrcs = (await page
-        .$$eval('img.FFVAD', images => images.map(image => image.getAttribute("src"))))
-        .filter(Boolean) // you get nulls sometimes for some reason
-        .filter(src => !postImageUrls.has(src))
-      newImageSrcs.forEach(src => { postImageUrls.add(src) })
-      downloadingImages.push(...newImageSrcs.map(src => download(src, 'postImages')))
+      if (picturesToSave && downloadingImages.length < picturesToSave) {
+        const newImageSrcs = (await page
+          .$$eval('img.FFVAD', images => images.map(image => image.getAttribute("src"))))
+          .filter(Boolean) // you get nulls sometimes for some reason
+          .filter(src => !postImageUrls.has(src))
+        newImageSrcs.forEach(src => { postImageUrls.add(src) })
+        for (src of newImageSrcs) {
+          if (downloadingImages.length < picturesToSave) downloadingImages.push(download(src, 'postImages'))
+        }
+      }
 
       const [nextArrow] = await page.$$('.coreSpriteRightPaginationArrow')
       if (nextArrow) {
