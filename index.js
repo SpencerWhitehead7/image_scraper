@@ -3,6 +3,7 @@ require('dotenv').config();
 const fs = require(`fs`)
 
 const puppeteer = require('puppeteer');
+const download = require('download');
 
 (async () => {
   let browser
@@ -33,6 +34,8 @@ const puppeteer = require('puppeteer');
 
     const urlsToCheck = []
     const postTexts = []
+    const postImageUrls = new Set()
+    const downloadingImages = []
     const [firstPost] = await page.$$('div.v1Nh3')
     firstPost.click()
 
@@ -59,6 +62,13 @@ const puppeteer = require('puppeteer');
         urlsToCheck.push(page.url())
       }
 
+      const newImageSrcs = (await page
+        .$$eval('img.FFVAD', images => images.map(image => image.getAttribute("src"))))
+        .filter(Boolean) // you get nulls sometimes for some reason
+        .filter(src => !postImageUrls.has(src))
+      newImageSrcs.forEach(src => { postImageUrls.add(src) })
+      downloadingImages.push(...newImageSrcs.map(src => download(src, 'postImages')))
+
       const [nextArrow] = await page.$$('.coreSpriteRightPaginationArrow')
       if (nextArrow) {
         nextArrow.click()
@@ -72,6 +82,7 @@ const puppeteer = require('puppeteer');
       ? `module.exports = [\n'${urlsToCheck.join("',\n'")}'\n]\n`
       : 'module.exports = []\n'
     )
+    await Promise.all(downloadingImages)
   } catch (err) {
     console.log(err)
   } finally {

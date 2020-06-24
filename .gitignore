@@ -4,6 +4,6 @@ node_modules
 .env
 
 # Ignore scraped posts
-downloaded_pictures/*
+postImages/*
 postTexts.txt
 urlsToRetry.js

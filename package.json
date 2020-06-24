@@ -16,6 +16,7 @@
   "homepage": "https://github.com/SpencerWhitehead7/image-scraper#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "download": "^8.0.0",
     "puppeteer": "^4.0.0"
   }
 }
