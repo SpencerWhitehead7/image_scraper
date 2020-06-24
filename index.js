@@ -31,6 +31,7 @@ const puppeteer = require('puppeteer');
     await page.waitForNavigation({ waitUntil: "networkidle0"})
     await page.goto(`https://www.instagram.com/${accountNameToScrape}`)
 
+    const urlsToCheck = []
     const postTexts = []
     const [firstPost] = await page.$$('div.v1Nh3')
     firstPost.click()
@@ -55,7 +56,7 @@ const puppeteer = require('puppeteer');
           }
         }
       } catch (_) {
-        console.log("no caption / timed out")
+        urlsToCheck.push(page.url())
       }
 
       const [nextArrow] = await page.$$('.coreSpriteRightPaginationArrow')
@@ -67,6 +68,10 @@ const puppeteer = require('puppeteer');
     }
 
     fs.writeFileSync('postTexts.txt', postTexts.join('\n\n'))
+    fs.writeFileSync('urlsToRetry.js', urlsToCheck.length
+      ? `module.exports = [\n'${urlsToCheck.join("',\n'")}'\n]\n`
+      : 'module.exports = []\n'
+    )
   } catch (err) {
     console.log(err)
   } finally {
