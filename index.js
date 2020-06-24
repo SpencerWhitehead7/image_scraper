@@ -50,6 +50,7 @@ const download = require('download');
         // you could also waitForSelector on the h2 itself, but that will either cause a long delay on posts with no caption
         // or the risk skipping a post because I set the timeout too aggressively
         await page.waitForSelector('article.M9sTE')
+        await page.waitFor(5000 + Math.random() * 3000)
         const [igName] = await page.$$('h2._6lAjh')
         if (igName) {
           const post = await page.evaluateHandle(el => el.nextElementSibling, igName)
